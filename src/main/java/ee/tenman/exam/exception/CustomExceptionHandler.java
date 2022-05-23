@@ -18,6 +18,11 @@ public class CustomExceptionHandler {
         return getErrorResponseResponseEntity(ex);
     }
 
+    @ExceptionHandler(TourNotFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleTourNotFoundException(TourNotFoundException ex) {
+        return getErrorResponseResponseEntity(ex);
+    }
+
     @ExceptionHandler(ConversionFailedException.class)
     protected ResponseEntity<ErrorResponse> handleConflict(RuntimeException ex) {
         return getErrorResponseResponseEntity(ex);

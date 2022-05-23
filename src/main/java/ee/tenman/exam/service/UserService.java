@@ -19,4 +19,8 @@ public class UserService {
         return SecurityUtils.getCurrentUsername().flatMap(userRepository::findTopByUsername)
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 }

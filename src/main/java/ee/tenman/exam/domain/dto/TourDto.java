@@ -1,7 +1,6 @@
 package ee.tenman.exam.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ee.tenman.exam.domain.enums.PizzaType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +14,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PizzaDto {
-
-    private Long pizzaId;
-    @ApiModelProperty(example = "Pepperoni")
+public class TourDto {
+    private Long tourId;
+    @ApiModelProperty(example = "Narva ringreis")
     private String name;
-    private PizzaType type;
+    @ApiModelProperty(example = "Estonia, Narva")
+    private String location;
+    @ApiModelProperty(example = "2022-05-23T10:00:00.00Z")
+    private String beginDate;
+    @ApiModelProperty(example = "2022-05-25T10:00:00.00Z")
+    private String endDate;
 }
