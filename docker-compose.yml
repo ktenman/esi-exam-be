@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  library-db:
+    image: postgres:14-alpine
+    ports:
+      - 54340:5432
+    environment:
+      POSTGRES_DB: advera
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
