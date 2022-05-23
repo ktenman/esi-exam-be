@@ -1,5 +1,6 @@
 package ee.tenman.exam.domain;
 
+import ee.tenman.exam.domain.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

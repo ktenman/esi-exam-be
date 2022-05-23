@@ -1,4 +1,4 @@
-package ee.tenman.exam.domain;
+package ee.tenman.exam.domain.enums;
 
 public enum RoleType {
     ROLE_USER,

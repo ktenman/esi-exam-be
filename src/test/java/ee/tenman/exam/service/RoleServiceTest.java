@@ -1,7 +1,7 @@
 package ee.tenman.exam.service;
 
 import ee.tenman.exam.domain.Role;
-import ee.tenman.exam.domain.RoleType;
+import ee.tenman.exam.domain.enums.RoleType;
 import ee.tenman.exam.repository.RoleRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

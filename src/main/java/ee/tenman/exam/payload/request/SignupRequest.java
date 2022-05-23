@@ -1,6 +1,6 @@
 package ee.tenman.exam.payload.request;
 
-import ee.tenman.exam.domain.RoleType;
+import ee.tenman.exam.domain.enums.RoleType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

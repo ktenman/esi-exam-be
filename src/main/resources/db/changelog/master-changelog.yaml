@@ -2,3 +2,6 @@ databaseChangeLog:
   - include:
       file: db/changelog/scripts/202205222014-create-initial.sql
       context: local, production
+  - include:
+      file: db/changelog/scripts/202205230900-add-pizza-and-order.sql
+      context: local, production
