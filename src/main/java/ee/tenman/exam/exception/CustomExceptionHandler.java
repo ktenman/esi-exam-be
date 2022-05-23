@@ -23,6 +23,21 @@ public class CustomExceptionHandler {
         return getErrorResponseResponseEntity(ex);
     }
 
+    @ExceptionHandler(RoleNotFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException ex) {
+        return getErrorResponseResponseEntity(ex);
+    }
+
+    @ExceptionHandler(EmailAlreadyTakenException.class)
+    protected ResponseEntity<ErrorResponse> handleEmailAlreadyTakenException(EmailAlreadyTakenException ex) {
+        return getErrorResponseResponseEntity(ex);
+    }
+
+    @ExceptionHandler(UsernameAlreadyTakenException.class)
+    protected ResponseEntity<ErrorResponse> handleUsernameAlreadyTakenException(UsernameAlreadyTakenException ex) {
+        return getErrorResponseResponseEntity(ex);
+    }
+
     private ResponseEntity<ErrorResponse> getErrorResponseResponseEntity(RuntimeException ex) {
         log.debug("Exception - {} and {}", ex.getClass(), ex.getMessage());
         final ErrorResponse errorResponse = ErrorResponse.builder()

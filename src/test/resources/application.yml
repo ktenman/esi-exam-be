@@ -1,16 +1,9 @@
-advera:
-  app:
-    jwtSecret: adveraSecretKey
-    jwtExpirationMs: 86400000
-
 logging:
   level:
     root: WARN
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
     org.hibernate.SQL: DEBUG
 
-server:
-  port: 8080
 spring:
   mvc:
     pathmatch:
@@ -19,10 +12,9 @@ spring:
     name: esi_project
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${HEROKU_POSTGRESQL_PINK_JDBC_URL}
-    username: ${HEROKU_POSTGRESQL_PINK_JDBC_USERNAME}
-    password: ${HEROKU_POSTGRESQL_PINK_JDBC_PASSWORD}
-    driver-classname: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:54333/library?charSet\=UTF8
+    username: postgres
+    password: admin
     hikari:
       maximumPoolSize: 5
   jpa:
@@ -47,6 +39,8 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: production
+  profiles:
+    active: prod
   main:
     allow-bean-definition-overriding: true
 

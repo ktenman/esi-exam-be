@@ -46,6 +46,8 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: local
+  main:
+    allow-bean-definition-overriding: true
 
 jwt:
   header: Authorization

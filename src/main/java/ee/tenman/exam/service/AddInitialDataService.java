@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class AddInitialDataService {
 
     @Resource
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @PostConstruct
     private void postConstruct() {
