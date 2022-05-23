@@ -43,7 +43,7 @@ public class TourController {
     }
 
     @GetMapping("/guests")
-    @PreAuthorize("hasRole('USER') or hasRole('PARTNER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<TourDto> findAllForGuests() {
         return tourService.findAll();
     }
