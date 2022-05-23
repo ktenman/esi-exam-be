@@ -28,6 +28,7 @@ public record TourService(TourRepository tourRepository, TourMapper tourMapper, 
         tour.setBeginDate(Instant.parse(tourDto.getBeginDate()));
         tour.setEndDate(Instant.parse(tourDto.getEndDate()));
         tour.setLocation(tourDto.getLocation());
+        tour.setStatus(tourDto.getStatus());
         Tour updatedTour = tourRepository.save(tour);
         return tourMapper.toTourDto(updatedTour);
     }

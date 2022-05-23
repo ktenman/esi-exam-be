@@ -24,6 +24,7 @@ public class TourMapper {
                 .location(tour.getLocation())
                 .beginDate(tour.getBeginDate().toString())
                 .endDate(tour.getEndDate().toString())
+                .status(tour.getStatus())
                 .build();
     }
 }

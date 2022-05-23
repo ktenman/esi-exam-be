@@ -1,6 +1,7 @@
 package ee.tenman.exam.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ee.tenman.exam.domain.enums.TourStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,6 @@ public class TourDto {
     private String beginDate;
     @ApiModelProperty(example = "2022-05-25T10:00:00.00Z")
     private String endDate;
+    @ApiModelProperty(example = "AVAILABLE")
+    private TourStatus status;
 }
