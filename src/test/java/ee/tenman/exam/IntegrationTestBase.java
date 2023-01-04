@@ -1,26 +1,26 @@
 package ee.tenman.exam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ee.tenman.exam.configuration.ClearDatabaseBeforeTestMethod;
+import ee.tenman.exam.configuration.DataSourceConfiguration;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.TestPropertySourceUtils;
+import org.springframework.context.annotation.Import;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = IntegrationTestBase.DockerPostgreDataSourceInitializer.class)
-@Testcontainers
 @AutoConfigureMockMvc
-@ClearDatabaseBeforeTestMethod
+@Import(DataSourceConfiguration.class)
+@Slf4j
 public abstract class IntegrationTestBase {
 
     @Resource
@@ -28,24 +28,18 @@ public abstract class IntegrationTestBase {
     @Resource
     protected ObjectMapper objectMapper;
 
-    public static PostgreSQLContainer<?> postgreDBContainer = new PostgreSQLContainer<>("postgres:10-alpine");
+    @Resource
+    protected DriverManagerDataSource dataSource;
 
-    static {
-        postgreDBContainer.start();
-    }
-
-    public static class DockerPostgreDataSourceInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext applicationContext) {
-
-            TestPropertySourceUtils.addInlinedPropertiesToEnvironment(
-                    applicationContext,
-                    "spring.datasource.url=" + postgreDBContainer.getJdbcUrl(),
-                    "spring.datasource.username=" + postgreDBContainer.getUsername(),
-                    "spring.datasource.password=" + postgreDBContainer.getPassword()
-            );
+    @BeforeEach
+    public void clearDatabaseBeforeTestMethod() {
+        try {
+            log.info("Executing sql script to clear database");
+            ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("clear_database.sql"));
+            log.info("Database cleared");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
-}
 
+}
